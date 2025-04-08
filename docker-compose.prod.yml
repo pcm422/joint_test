@@ -37,6 +37,7 @@ services:
       - media_volume:/app/media:ro # 앱 컨테이너와 공유 (읽기 전용)
       - certbot_conf:/etc/letsencrypt # Certbot 설정 공유
       - ./certbot/www:/var/www/certbot # Certbot ACME challenge 공유
+      - ./certbot/conf/ssl-dhparams.pem:/etc/letsencrypt/ssl-dhparams.pem:ro
     depends_on:
       - app # 앱이 실행된 후 Nginx가 프록시하도록 (선택적)
     restart: unless-stopped
