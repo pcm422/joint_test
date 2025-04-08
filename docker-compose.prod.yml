@@ -36,7 +36,7 @@ services:
       - static_volume:/app/static:ro # 앱 컨테이너와 공유 (읽기 전용)
       - media_volume:/app/media:ro # 앱 컨테이너와 공유 (읽기 전용)
       - certbot_conf:/etc/letsencrypt # Certbot 설정 공유
-      - certbot_www:/var/www/certbot # Certbot ACME challenge 공유
+      - ./certbot/www:/var/www/certbot # Certbot ACME challenge 공유
     depends_on:
       - app # 앱이 실행된 후 Nginx가 프록시하도록 (선택적)
     restart: unless-stopped
@@ -46,7 +46,7 @@ services:
     image: certbot/certbot:latest
     volumes:
       - certbot_conf:/etc/letsencrypt
-      - certbot_www:/var/www/certbot
+      - ./certbot/www:/var/www/certbot
     # 처음 인증서 받을 때 & 갱신 시 실행할 명령어 (수동 실행 또는 스케줄링)
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'" # 자동 갱신 예시
 
@@ -54,4 +54,3 @@ volumes:
   static_volume: # 정적 파일용 볼륨
   media_volume: # 미디어 파일용 볼륨
   certbot_conf:
-  certbot_www:
