@@ -48,7 +48,6 @@ services:
       - certbot_conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
     # 처음 인증서 받을 때 & 갱신 시 실행할 명령어 (수동 실행 또는 스케줄링)
-    entrypoint: ""
 
 volumes:
   static_volume: # 정적 파일용 볼륨
