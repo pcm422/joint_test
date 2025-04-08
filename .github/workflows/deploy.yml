@@ -45,7 +45,8 @@ jobs:
         with:
           host: ${{ secrets.NCP_SERVER_HOST }}
           username: ${{ secrets.NCP_SERVER_USER }}
-          key: ${{ secrets.NCP_SERVER_SSH_KEY }}
+          # key: ${{ secrets.NCP_SERVER_SSH_KEY }}
+          password: ${{ secrets.NCP_SERVER_PASSWORD }}
           script: |
             cd ${{ secrets.NCP_PROJECT_PATH }}
 
